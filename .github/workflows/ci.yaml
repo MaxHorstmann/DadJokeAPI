@@ -1,0 +1,12 @@
+name: ci
+on: push
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - run: |
+        docker build -t maxhorstmann/dadjokeapi:latest .
+        docker push maxhorstmann/dadjokeapi:latest
+
