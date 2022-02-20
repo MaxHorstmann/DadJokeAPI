@@ -7,6 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@main
     - run: |
+        docker login -u maxhorstmann -p ${{ secrets.DOCKER_PASSWORD }}
         docker build -t maxhorstmann/dadjokeapi:latest .
         docker push maxhorstmann/dadjokeapi:latest
 
