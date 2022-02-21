@@ -24,4 +24,5 @@ jobs:
       run: |
         kubectl create namespace dadjokes --dry-run=client -o yaml | kubectl apply -f -
         kubectl apply -n dadjokes -f dadjokes.yaml 
+        kubectl rollout restart deployment dadjokeapi-deployment -n dadjokes
 
