@@ -11,9 +11,9 @@ schemes:
 swagger: "2.0"
 
 paths:
-  /healthz:
+  /joke:
     get:
-      operationId: checkHealth
+      operationId: getJoke
       produces:
       - text/plain
       responses:
