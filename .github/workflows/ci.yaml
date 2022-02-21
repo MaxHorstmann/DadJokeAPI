@@ -1,6 +1,8 @@
 name: ci
 on: push
-  
+env:
+  CLUSTER_NAME: testing
+  CLUSTER_RESOURCE_GROUP: aks-testing
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,6 +13,12 @@ jobs:
         docker login -u maxhorstmann -p ${{ secrets.DOCKER_PASSWORD }}
         docker build -t maxhorstmann/dadjokeapi:latest .
         docker push maxhorstmann/dadjokeapi:latest
+    - name: login to AKS
+      uses: azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: ${{ env.CLUSTER_NAME }}
+        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}        
     - name: apply changes to Kubernetes
       run: |
         kubectl create namespace dadjokes --dry-run=client -o yaml | kubectl apply -f -
