@@ -6,8 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
-    - run: |
+    - name: build and push container image
+      run: |
         docker login -u maxhorstmann -p ${{ secrets.DOCKER_PASSWORD }}
         docker build -t maxhorstmann/dadjokeapi:latest .
         docker push maxhorstmann/dadjokeapi:latest
+    - name: apply changes to Kubernetes
+      run: |
+        kubectl create namespace dadjokes --dry-run=client -o yaml | kubectl apply -f -
+        kubectl apply -n dadjokes -f dadjokes.yaml 
 
