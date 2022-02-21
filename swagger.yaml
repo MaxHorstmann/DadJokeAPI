@@ -1,0 +1,25 @@
+consumes:
+- application/json
+info:
+  description: Dad Jokes
+  title: Not really funny jokes
+  version: 0.1.0
+produces:
+- application/json
+schemes:
+- http
+swagger: "2.0"
+
+paths:
+  /healthz:
+    get:
+      operationId: checkHealth
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: OK message.
+          schema:
+            type: string
+            enum:
+            - OK

@@ -7,8 +7,11 @@ import (
 )
 
 func main() {
-
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "index.html")
+	})
+
+	http.HandleFunc("/joke", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, "I'm afraid for the calendar. Its days are numbered.")
 	})
 	log.Println("Listening on localhost:8080")

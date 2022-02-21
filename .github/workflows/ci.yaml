@@ -11,6 +11,7 @@ jobs:
     - name: build and push container image
       run: |
         docker login -u maxhorstmann -p ${{ secrets.DOCKER_PASSWORD }}
+        docker run -i yousan/swagger-yaml-to-html < swagger.yaml > index.html        
         docker build -t maxhorstmann/dadjokeapi:latest .
         docker push maxhorstmann/dadjokeapi:latest
     - name: login to AKS
